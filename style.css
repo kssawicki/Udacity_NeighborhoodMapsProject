@@ -1,3 +1,14 @@
-#map {
-	height: 100%;
+.map {
+	order: 2;
+	flex-grow: 4;
+	background-color: #fff;
+	text-align: center;
+	height: 1000px;
+}
+
+.options-box {
+	flex-grow: 1;
+	height: 50px;
+	font-size: 1em;
+	padding: 5px 20px;
 }

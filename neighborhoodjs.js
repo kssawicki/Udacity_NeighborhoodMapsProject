@@ -2,12 +2,10 @@
 var map;
 function initMap() {
 	"use strict";
-	map = new google.maps.Map(document.getElementbyId('map'), {
-		center: {lat: 39.5296, lng: 119.8138},
-		zoom: 10
+	map = new google.maps.Map(document.getElementById('map'), {
+		center: {lat: 39.530895, lng: -119.814972},
+		zoom: 14
 	});
-	//Start the ViewModel
-	ko.applyBindings(new ViewModel());
 }
 
 // Alert user if the map isn't working
@@ -16,65 +14,66 @@ function googleError() {
 	document.getElementById('error').innerHTML = "<h2>Google Maps is not responding. Try refreshing the page later.</h2>";
 }
 
-// Place constructor
-// Credit https://discussions.udacity.com/t/having-trouble-accessing-data-outside-an-ajax-request/39072/10
-var Place = function (data) {
-    "use strict";
-    this.name = ko.observable(data.name);
-    this.lat = ko.observable(data.lat);
-    this.lng = ko.observable(data.lng);
-    this.id = ko.observable(data.id);
-    this.marker = ko.observable();
-    this.phone = ko.observable('');
-    this.description = ko.observable('');
-    this.address = ko.observable('');
-    this.rating = ko.observable('');
-    this.url = ko.observable('');
-    this.canonicalUrl = ko.observable('');
-    this.photoPrefix = ko.observable('');
-    this.photoSuffix = ko.observable('');
-    this.contentString = ko.observable('');
-};
 
 // ViewModel
 var ViewModel = function () {
     "use strict";
-    // Make this accessible
-    var self = this;
 
     // Create an array of all places
-    // Credit https://www.udacity.com/course/viewer#!/c-ud989-nd/l-3406489055/e-3464818693/m-3464818694
-    this.placeList = ko.observableArray([]);
-
-    // Call the Place constructor
-    // Create Place objects for each item in locations & store them in the above array
-    // Credit https://www.udacity.com/course/viewer#!/c-ud989-nd/l-3406489055/e-3464818693/m-3464818694
-    locations.forEach(function (placeItem) {
-        self.placeList.push(new Place(placeItem));
+   
+    // Initalize infowindow
+    var infowindow = new google.maps.InfoWindow({
+    	maxWidth: 200,
     });
 
+    //Initalize marker
+    var marker = new google.maps.Marker ({
+        position: dogs,
+        title: ''
+    });
+
+document.getElementById('show-dogs').addEventListener('click', show-dogs);
+document.getElementById('hide-dogs').addEventListener('click', hide-dogs);
 
 
 // Information about the places these dogs live
-var markers = [
-{
-	name: "Ziggy",
-	lat: 39.5050151,
-	lng: -119.812267,
-},
-{
-	name: "Pogo",
-	lat:
+    var dogs = [
+    {
+        name: 'Ziggy',
+	    lat: 39.5050151,
+	    lng: -119.812267,
+        id: 'ziggy'
+    },
+    {
+        name: 'Pogo',
+        lat: 39.534116,
+        lng: -119.877041,
+        id: 'pogo'
+    },
+    {
+        name: 'Frank & Oreo',
+        lat: 39.419104,
+        lng: -119.772268,
+        id: 'f_o'
+    },
+     {
+        name: 'Valentina',
+        lat: 39.512546,
+        lng: -119.813448,
+        id: 'valentina'
+    },
+    {
+        name: 'Milo',
+        lat: 39.504568,
+        lng: -119.809846,
+        id: 'milo'
+    },
+    {
+        name: 'Kimbo',
+        lat: 39.576616,
+        lng: -119.824863,
+        id: 'kimbo'
+    },
+    ];
+
 }
-{
-	name: "Milo",
-	lat:
-	lng:
-}
-{
-	name: "Joey"
-}
-{
-	name: "Valentina"
-}
-];

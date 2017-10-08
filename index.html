@@ -3,16 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width", initial-scale="1.0">
-<link rel="stylesheet" href=".../style.css">
+<link rel="stylesheet" href="./style.css">
 <title>Dogs I Know</title>
 </head>
 
 <body>
-	<div id="map"></div>
-
-
-<script type='text/javascript' src='knockout-3.4.1.js'></script>
-<script src=".../neighborhoodjs.js"></script>
+	<div class="map" id="map"></div>
+	<div class="options-box" id="options-box">
+	<h1>Check out how many friends I have (#youjealous?)</h1>
+	<div>
+		<input id="show-dogs" type="button" value="Show Dogs">
+		<input id="hide-dogs" type="button" value="Hide Dogs">
+	</div>
+	<ul class="list" id="list" data-bind="foreach: filteredList">
+	<li class="dogs" id="dogs" data-bind="text: name, click: bounce"></li>
+	</div>
+<script src="./neighborhoodjs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALFqt8e2sZQoXr0Tu3SQI2ZXLBgdYRDWY&callback=initMap"></script>
 </body>
 
