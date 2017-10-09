@@ -3,6 +3,7 @@
 // Information about the places these dogs live
     var locations = [
     {title: 'Ziggy', location: {lat: 39.5050151, lng: -119.812267}},
+    {title: 'Pogo', location: {lat: 39.533983, lng: -119.878318}},
     {title: 'Frank & Oreo', location: {lat: 39.419104, lng: -119.772268}},
     {title: 'Valentina', location: {lat: 39.512546, lng: -119.813448}},
     {title: 'Milo', location: {lat: 39.504568, lng: -119.809846}},
