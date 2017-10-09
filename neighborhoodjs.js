@@ -43,7 +43,7 @@ var markers = [];
           marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
           });
-        }
+      }
         document.getElementById('show-dogs').addEventListener('click', show-dogs);
         document.getElementById('hide-dogs').addEventListener('click', hide-dogs);
       }
@@ -65,7 +65,7 @@ var markers = [];
       }
 
       // This function will loop through the markers array and display them all.
-      function showListings() {
+      function show-dogs() {
         var bounds = new google.maps.LatLngBounds();
         // Extend the boundaries of the map for each marker and display the marker
         for (var i = 0; i < markers.length; i++) {
@@ -75,7 +75,7 @@ var markers = [];
         map.fitBounds(bounds);
       }
       // This function will loop through the listings and hide them all.
-      function hideListings() {
+      function hide-dogs() {
         for (var i = 0; i < markers.length; i++) {
           markers[i].setMap(null);
         }
