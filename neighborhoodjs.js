@@ -6,6 +6,8 @@ var locations = [{
 
     title: 'Ziggy',
 
+    description: "This is my dog! She's 6 years old, a border collie-lab mix, and likes to eat anything that has peanut butter (like me!)",
+
     location: {
 
       lat: 39.5050151,
