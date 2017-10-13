@@ -6,7 +6,11 @@ var friendLocations = [{
 
     title: 'Ziggy',
 
-    description: "This is my dog! She's 6 years old, a border collie-lab mix, and likes to eat anything that has peanut butter (like me!)",
+    image: "<IMG SRC=./imgs/ziggy.jpeg>",
+
+    description: 'This is my dog! She is 6 years old, a border collie-lab mix, and likes to eat anything that has peanut butter (like me!)',
+
+    url: 'Ziggy`s instagram! + ',
 
     location: {
 
@@ -23,6 +27,8 @@ var friendLocations = [{
 
     title: 'Pogo',
 
+    description: 'This half jack russell, half lab mix is really hyper! He loves eating all the veggies and fruits his owners grow, so he is very fit!',
+
     location: {
 
       lat: 39.533983,
@@ -36,6 +42,8 @@ var friendLocations = [{
   {
 
     title: 'Frank & Oreo',
+
+    description: 'Frank and Oreo are my boyfriend`s parents` dogs! They are both seniors, and are very friendly! Though they can annoy each other to the point of biting one another, they are best friends!',
 
     location: {
 
@@ -51,6 +59,8 @@ var friendLocations = [{
 
     title: 'Valentina',
 
+    description: 'Valentina is a half pomeranian, half chihuahua mix! She is basically a model because of how extravagant her fur is!',
+
     location: {
 
       lat: 39.512546,
@@ -65,6 +75,8 @@ var friendLocations = [{
 
     title: 'Milo',
 
+    description: 'Milo is a great guard dog that lives next door to my mom. His favorite hobby is to bark at EVERYTHING.',
+
     location: {
 
       lat: 39.504568,
@@ -78,6 +90,8 @@ var friendLocations = [{
   {
 
     title: 'Kimbo',
+
+    description: 'Though Kimbo looks gigantic and threatening, he is actually kinda dumb and very sweet! He is a purebred rotweiller.',
 
     location: {
 
@@ -145,6 +159,10 @@ function initMap() {
 
     var title = friendLocations[i].title;
 
+    var description = friendLocations[i].description;
+
+    var image = friendLocations[i].image;
+
     // Create a marker per location, and put into markers array.
 
     var marker = new google.maps.Marker({
@@ -152,6 +170,12 @@ function initMap() {
       map: map,
 
       position: position,
+
+      image: image,
+
+      username: username,
+
+      description: description,
 
       title: title,
 
@@ -184,6 +208,13 @@ function initMap() {
 
 // on that markers position.
 
+function getContentString(marker) {
+  var contentString = '<div class="infoWindow"><h4><strong>' + marker.title + '</strong></h4><br>'
+                      + '<p>' + marker.description + '</p></div>';
+
+  return contentString;
+}
+
 function populateInfoWindow(marker, infowindow) {
 
   //ajax call variable formatting (commas on multiple var assignment not semicolons)
@@ -193,16 +224,43 @@ function populateInfoWindow(marker, infowindow) {
   //     urlBase = "whatever the api gives you that never changes between calls",
   //     fullApiURL = urlBase + "formatting" + query + "formatting from api docs"
 
-  // $.ajax({
-  //   url: fullApiURL,
-  //   dataType: dt,
-  //   success: function(response){
-  //     move the stuff between ************** and ******** here after this call ServiceWorkerMessageEvent
+  //if marker has no description do the call
+   //otherwise set info window content and open info window
 
-  //   } error: function(response){
-  //     googleError();
-  //   }
-  // });
+
+// Instagram API
+   var token = '',
+   username = ''
+   num_photos = 4;
+  
+  $.ajax({
+   url: 'https://api.instagram.com/v1/users/search',
+  dataType: 'jsonp',
+  type: 'GET',
+  data: {access_token: token, q: username},
+  success: function(data){
+            console.log(data);
+            $.ajax({
+              url: 'https://api.instagram.com/v1/users/' + data.data[0].id + '/media/recent',
+              dataType: 'jsonp',
+              type: 'GET',
+              data: {access_token: token, count num_photos},
+              success: function(data2){
+                console.log(data2);
+                for(x in data2.data){
+                  $('ul').append('<li><img src="'+data2.data[x].images.thumbnail.url+'"></li>');  
+        }
+          },
+      error: function(data2){
+        console.log(data2);
+      }
+    });
+  },
+  error: function(data){
+    console.log(data);
+  }
+});
+        
 
 
   // Check to make sure the infowindow is not already opened on this marker.
@@ -211,11 +269,12 @@ function populateInfoWindow(marker, infowindow) {
 
     infowindow.marker = marker;
 
-    infowindow.setContent('<div><strong>' + marker.title + '</strong><br></div>');
+    //infowindow.setContent('<div><strong>' + marker.title + '</strong><br></div>');
+    infowindow.setContent(getContentString(marker));
 
     infowindow.open(map, marker);
 
-    infoWindowContent += '<h4>' + 
+    //infoWindowContent += '<h4>' + 
 
     // Make sure the marker property is cleared if the infowindow is closed.
 
@@ -319,4 +378,3 @@ function FriendsViewModel(){
 
 var FVM = new FriendsViewModel();
 ko.applyBindings(FVM);
-
