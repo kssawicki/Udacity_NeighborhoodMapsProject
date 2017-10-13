@@ -363,9 +363,9 @@ function FriendsViewModel(){
     largeInfowindow = new googleError.maps.Infowindow();
     for(var i = 0; i < markers.length; i++){
       if(this.title == markers[i].title){
-        populateInfoWindow(markers[i], largeInfowindow)
+        populateInfoWindow(markers[i], largeInfowindow);
       }
-    };
+    }
   };
 
 }
