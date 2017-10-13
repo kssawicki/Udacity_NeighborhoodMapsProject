@@ -191,7 +191,7 @@ function initMap() {
     friendLocationMarker(i, marker);
 
     //use extracted function for onclick 
-    markerListener(marker)
+    markerListener(marker);
     bounds.extend(markers[i].position);
   }
   map.fitBounds(bounds);
@@ -207,8 +207,7 @@ function initMap() {
 // on that markers position.
 
 function getContentString(marker) {
-  var contentString = '<div class="infoWindow"><h4><strong>' + marker.title + '</strong></h4><br>'
-                      + '<p>' + marker.description + '</p></div>';
+  var contentString = '<div class="infoWindow"><h4><strong>' + marker.title + '</strong></h4><br>' + '<p>' + marker.description + '</p></div>';
 
   return contentString;
 }
