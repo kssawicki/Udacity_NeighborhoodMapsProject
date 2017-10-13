@@ -4,13 +4,11 @@
 
 var friendLocations = [{
 
-    title: 'Ziggy',
+    title: "Ziggy",
 
-    image: '<IMG SRC=./imgs/ziggy.jpeg>',
+    image: "<IMG SRC=./imgs/ziggy.jpeg>",
 
-    description: 'This is my dog! She is 6 years old, a border collie-lab mix, and likes to eat anything that has peanut butter (like me!)',
-
-    
+    description: "This is my dog! She is 6 years old, a border collie-lab mix, and likes to eat anything that has peanut butter (like me!)",
 
     location: {
 
@@ -25,9 +23,9 @@ var friendLocations = [{
 
   {
 
-    title: 'Pogo',
+    title: "Pogo",
 
-    description: 'This half jack russell, half lab mix is really hyper! He loves eating all the veggies and fruits his owners grow, so he is very fit!',
+    description: "This half jack russell, half lab mix is really hyper! He loves eating all the veggies and fruits his owners grow, so he is very fit!",
 
     location: {
 
@@ -41,9 +39,9 @@ var friendLocations = [{
 
   {
 
-    title: 'Frank & Oreo',
+    title: "Frank & Oreo",
 
-    description: 'Frank and Oreo are my boyfriend`s parents` dogs! They are both seniors, and are very friendly! Though they can annoy each other to the point of biting one another, they are best friends!',
+    description: "Frank and Oreo are my boyfriend`s parents` dogs! They are both seniors, and are very friendly! Though they can annoy each other to the point of biting one another, they are best friends!",
 
     location: {
 
@@ -57,9 +55,9 @@ var friendLocations = [{
 
   {
 
-    title: 'Valentina',
+    title: "Valentina",
 
-    description: 'Valentina is a half pomeranian, half chihuahua mix! She is basically a model because of how extravagant her fur is!',
+    description: "Valentina is a half pomeranian, half chihuahua mix! She is basically a model because of how extravagant her fur is!",
 
     location: {
 
@@ -73,9 +71,9 @@ var friendLocations = [{
 
   {
 
-    title: 'Milo',
+    title: "Milo",
 
-    description: 'Milo is a great guard dog that lives next door to my mom. His favorite hobby is to bark at EVERYTHING.',
+    description: "Milo is a great guard dog that lives next door to my mom. His favorite hobby is to bark at EVERYTHING.",
 
     location: {
 
@@ -89,9 +87,9 @@ var friendLocations = [{
 
   {
 
-    title: 'Kimbo',
+    title: "Kimbo",
 
-    description: 'Though Kimbo looks gigantic and threatening, he is actually kinda dumb and very sweet! He is a purebred rotweiller.',
+    description: "Though Kimbo looks gigantic and threatening, he is actually kinda dumb and very sweet! He is a purebred rotweiller.",
 
     location: {
 
@@ -367,7 +365,7 @@ function FriendsViewModel(){
       if(this.title == markers[i].title){
         populateInfoWindow(markers[i], largeInfowindow)
       }
-    }
+    };
   };
 
 }
