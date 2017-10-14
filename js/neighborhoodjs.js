@@ -4,7 +4,7 @@ var friendLocations = [{
 
     title: "Ziggy",
 
-    image: "<IMG SRC=./imgs/ziggy.jpeg>",
+    image: "<a href=./imgs/ziggy.jpeg>",
 
     description: "This is my dog! She is 6 years old, a border collie-lab mix, and likes to eat anything that has peanut butter (like me!)",
 
@@ -212,47 +212,47 @@ function populateInfoWindow(marker, infowindow) {
 
   //ajax call variable formatting (commas on multiple var assignment not semicolons)
 
-  // var query = marker.title,
-  //     dt = 'jsonp',
-  //     urlBase = "https://api.instagram.com/v1/users/search",
-  //    fullApiURL = "https://api.instagram.com/v1/users/search" + "formatting" + query + "formatting from api docs"
+  var query = marker.title,
+       dt = 'jsonp',
+       urlBase = "https://api.instagram.com/v1/users/search",
+     fullApiURL = "https://api.instagram.com/v1/users/search" + "formatting" + query + "formatting from api docs"
 
   //if marker has no description do the call
   //otherwise set info window content and open info window
 
 
   // Instagram API
-  //  var token = '271162913.1677ed0.7a8017e118e146b2a2ebe40414359c1d',
-  //  username = '',
-  //  num_photos = 4;
+   var token = '271162913.1677ed0.7a8017e118e146b2a2ebe40414359c1d',
+    username = '',
+    num_photos = 4;
 
-  // $.ajax({
-  //  url: 'https://api.instagram.com/v1/users/search',
-  // dataType: 'jsonp',
-  //  type: 'GET',
-  //  data: {access_token: token, q: username},
-  //  success: function(data){
-  //            console.log(data);
-  //            $.ajax({
-  //              url: 'https://api.instagram.com/v1/users/' + data.data[0].id + '/media/recent',
-  //             dataType: 'jsonp',
-  //             type: 'GET',
-  //             data: {access_token: token, count num_photos},
-  //             success: function(data2){
-  //               console.log(data2);
-  //               for(x in data2.data){
-  //                 $('ul').append('<li><img src="'+data2.data[x].images.thumbnail.url+'"></li>');  
-  //       }
-  //         },
-  //     error: function(data2){
-  //       console.log(data2);
-  //     }
-  //   });
-  //  },
-  //  error: function(data){
-  //    console.log(data);
-  // }
-  //});
+   $.ajax({
+    url: 'https://api.instagram.com/v1/users/search',
+   dataType: 'jsonp',
+    type: 'GET',
+    data: {access_token: token, q: username},
+    success: function(data){
+             console.log(data);
+              $.ajax({
+               url: 'https://api.instagram.com/v1/users/' + data.data[0].id + '/media/recent',
+              dataType: 'jsonp',
+              type: 'GET',
+               data: {access_token: token, count: num_photos},
+               success: function(data2){
+                 console.log(data2);
+                for(x in data2.data){
+                  $('ul').append('<li><img src="'+data2.data[x].images.thumbnail.url+'"></li>');  
+        }
+          },
+      error: function(data2){
+        console.log(data2);
+      }
+     });
+    },
+  error: function(data){
+      console.log(data);
+   }
+  });
 
 
 
