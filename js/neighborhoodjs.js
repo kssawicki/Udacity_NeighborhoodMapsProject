@@ -1,7 +1,5 @@
 // 'use strict';
-
 // Information about the places these dogs live
-
 var friendLocations = [{
 
     title: "Ziggy",
@@ -16,7 +14,7 @@ var friendLocations = [{
 
       lng: -119.812267,
 
-     }
+    }
 
 
   },
@@ -135,12 +133,12 @@ function initMap() {
 
   var largeInfoWindow = new google.maps.InfoWindow();
 
-  var friendLocationMarker = function(f, marker){
+  var friendLocationMarker = function(f, marker) {
     friendLocations[f].marker = marker;
   };
 
-  var markerListener = function(marker){
-    marker.addListener('click', function(){
+  var markerListener = function(marker) {
+    marker.addListener('click', function() {
       populateInfoWindow(this, largeInfoWindow);
     });
   };
@@ -214,52 +212,52 @@ function populateInfoWindow(marker, infowindow) {
 
   //ajax call variable formatting (commas on multiple var assignment not semicolons)
 
- // var query = marker.title,
- //     dt = 'jsonp',
- //     urlBase = "https://api.instagram.com/v1/users/search",
- //    fullApiURL = "https://api.instagram.com/v1/users/search" + "formatting" + query + "formatting from api docs"
+  // var query = marker.title,
+  //     dt = 'jsonp',
+  //     urlBase = "https://api.instagram.com/v1/users/search",
+  //    fullApiURL = "https://api.instagram.com/v1/users/search" + "formatting" + query + "formatting from api docs"
 
   //if marker has no description do the call
-   //otherwise set info window content and open info window
+  //otherwise set info window content and open info window
 
 
-// Instagram API
- //  var token = '271162913.1677ed0.7a8017e118e146b2a2ebe40414359c1d',
- //  username = '',
- //  num_photos = 4;
-  
- // $.ajax({
- //  url: 'https://api.instagram.com/v1/users/search',
- // dataType: 'jsonp',
-//  type: 'GET',
-//  data: {access_token: token, q: username},
-//  success: function(data){
-//            console.log(data);
-//            $.ajax({
-//              url: 'https://api.instagram.com/v1/users/' + data.data[0].id + '/media/recent',
- //             dataType: 'jsonp',
- //             type: 'GET',
- //             data: {access_token: token, count num_photos},
- //             success: function(data2){
- //               console.log(data2);
- //               for(x in data2.data){
- //                 $('ul').append('<li><img src="'+data2.data[x].images.thumbnail.url+'"></li>');  
- //       }
- //         },
- //     error: function(data2){
- //       console.log(data2);
- //     }
- //   });
-//  },
-//  error: function(data){
-//    console.log(data);
- // }
-//});
-        
+  // Instagram API
+  //  var token = '271162913.1677ed0.7a8017e118e146b2a2ebe40414359c1d',
+  //  username = '',
+  //  num_photos = 4;
+
+  // $.ajax({
+  //  url: 'https://api.instagram.com/v1/users/search',
+  // dataType: 'jsonp',
+  //  type: 'GET',
+  //  data: {access_token: token, q: username},
+  //  success: function(data){
+  //            console.log(data);
+  //            $.ajax({
+  //              url: 'https://api.instagram.com/v1/users/' + data.data[0].id + '/media/recent',
+  //             dataType: 'jsonp',
+  //             type: 'GET',
+  //             data: {access_token: token, count num_photos},
+  //             success: function(data2){
+  //               console.log(data2);
+  //               for(x in data2.data){
+  //                 $('ul').append('<li><img src="'+data2.data[x].images.thumbnail.url+'"></li>');  
+  //       }
+  //         },
+  //     error: function(data2){
+  //       console.log(data2);
+  //     }
+  //   });
+  //  },
+  //  error: function(data){
+  //    console.log(data);
+  // }
+  //});
+
 
 
   // Check to make sure the infowindow is not already opened on this marker.
-// **************
+  // **************
   if (infowindow.marker != marker) {
 
     infowindow.marker = marker;
@@ -280,33 +278,33 @@ function populateInfoWindow(marker, infowindow) {
     });
 
   }
-// ********************
+  // ********************
 }
 
 
 
 // This function will show all names so that the user will search by the search bar
 function searchlist() {
-    // Declare variables
-    var input, filter, ul, li, a, i;
-    input = document.getElementById('search-box');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("dog-list");
-    li = ul.getElementsByTagName('li');
+  // Declare variables
+  var input, filter, ul, li, a, i;
+  input = document.getElementById('search-box');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("dog-list");
+  li = ul.getElementsByTagName('li');
 
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
     }
+  }
 }
 
 
-function FriendLocation(title, location, count){
+function FriendLocation(title, location, count) {
   var self = this;
   self.count = count;
   self.title = title;
@@ -314,18 +312,18 @@ function FriendLocation(title, location, count){
   self.visibility = ko.observable(true);
 }
 
-function FriendsViewModel(){
+function FriendsViewModel() {
   var self = this;
 
   self.searchBar = ko.observable('');
 
-  self.searchResults = ko.computed(function(){
+  self.searchResults = ko.computed(function() {
     var results = "";
     results += self.searchBar().toUpperCase();
     return results;
-  },(self));
+  }, (self));
 
-  self.capitalizeInput = function(){
+  self.capitalizeInput = function() {
     var currentVal = self.searchBar();
     self.searchBar(currentVal.toUpperCase());
   };
@@ -334,22 +332,24 @@ function FriendsViewModel(){
   self.friendLocations = ko.observableArray();
 
   var i = 0;
-  friendLocations.forEach((friend) =>{
+  friendLocations.forEach((friend) => {
     self.friendLocations.push(new FriendLocation(friend.title, friend.locaiton, i));
     i += 1;
   });
 
   //  http://www.knockmeout.net/2011/04/utility-function-in-knockoutjs.html
-  self.filteredList = ko.computed(function(){
+  self.filteredList = ko.computed(function() {
     var filter = self.searchResults().toUpperCase();
-    if(filter === ""){
-      self.friendLocations().forEach((friend) =>{
+    if (filter === "") {
+      self.friendLocations().forEach((friend) => {
         friend.visibility(true);
-        markers.forEach((marker) => {marker.setVisible(true);});
+        markers.forEach((marker) => {
+          marker.setVisible(true);
+        });
       });
       return self.friendLocations();
     } else {
-      return ko.utils.arrayFilter(self.friendLocations(), function(friend){
+      return ko.utils.arrayFilter(self.friendLocations(), function(friend) {
         var string = friend.title.toUpperCase();
         var result = (string.search(filter) >= 0);
         friend.visibility(result);
@@ -361,8 +361,8 @@ function FriendsViewModel(){
 
   self.eventClickWindow = function() {
     largeInfowindow = new googleError.maps.Infowindow();
-    for(var i = 0; i < markers.length; i++){
-      if(this.title == markers[i].title){
+    for (var i = 0; i < markers.length; i++) {
+      if (this.title == markers[i].title) {
         populateInfoWindow(markers[i], largeInfowindow);
       }
     }
