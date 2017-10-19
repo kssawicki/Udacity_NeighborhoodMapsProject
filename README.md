@@ -21,4 +21,18 @@ This was a pretty extensive project, and I definitely have to thank the followin
  ## Using the application
 
  1. Open your terminal and clone this repository:
- ` $ git clone https://github.com/kssawicki/Udacity_NeighborhoodMapsProject.git`
+ `$ git clone https://github.com/kssawicki/Udacity_NeighborhoodMapsProject.git`
+
+ 2. Move to the directory you cloned the repository to.
+
+ 3. Install http-server:
+ `$ npm install http-server -g`
+
+ 4. Change your directory to src:
+ `$cd /{directory}/src
+
+ 5. Run server
+ `$ http-server`
+
+ 6. Visit URL:
+ `$ http://localhost:8080`
