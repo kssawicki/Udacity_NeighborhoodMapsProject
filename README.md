@@ -17,3 +17,8 @@ This was a pretty extensive project, and I definitely have to thank the followin
  - Valentina
  - Kimbo
  - Frank & Oreo
+
+ ## Using the application
+
+ 1. Open your terminal and clone this repository:
+ ` $ git clone https://github.com/kssawicki/Udacity_NeighborhoodMapsProject.git`

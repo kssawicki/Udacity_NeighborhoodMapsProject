@@ -11,16 +11,20 @@
    <body>
     <div class="container-fluid">
         <div class="row">
-                <input class="col-sm-2" data-bind="textInput: searchBar, valueUpdate: 'afterkeydown'" placeholder="search friends" />
-        </div>
+        <div class="col-2">
+                <input data-bind="textInput: searchBar, valueUpdate: 'afterkeydown'" placeholder="search friends" />
         <ul data-bind="foreach: friendLocations">
                 <li>
                     <a href="#" data-bind="text: title, visible: visibility, click: $root.eventClickWindow" ></a>
                 </li>
         </ul>
-
+        </div>
+        <div class="col-30">
         <div id="map"></div>
     </div>
+    </div>
+    </div>
+
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"></script>
       <script src="js/neighborhoodjs.js"></script>

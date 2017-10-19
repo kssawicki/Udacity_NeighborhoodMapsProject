@@ -8,6 +8,8 @@ var friendLocations = [{
 
     description: "This is my dog! She is 6 years old, a border collie-lab mix, and likes to eat anything that has peanut butter (like me!)",
 
+    url: "https://www.instagram.com/katherinessawicki/",
+
     location: {
 
       lat: 39.5050151,
@@ -159,6 +161,8 @@ function initMap() {
 
     var image = friendLocations[i].image;
 
+    var url = friendLocations[i].url;
+
     // Create a marker per location, and put into markers array.
 
     var marker = new google.maps.Marker({
@@ -173,11 +177,15 @@ function initMap() {
 
       title: title,
 
+      url: url,
+
       animation: google.maps.Animation.DROP,
 
       id: i
 
     });
+
+
 
     // Push the marker to our array of markers.
 
@@ -222,37 +230,7 @@ function populateInfoWindow(marker, infowindow) {
 
 
   // Instagram API
-   var token = '271162913.1677ed0.7a8017e118e146b2a2ebe40414359c1d',
-    username = '',
-    num_photos = 4;
 
-   $.ajax({
-    url: 'https://api.instagram.com/v1/users/search',
-   dataType: 'jsonp',
-    type: 'GET',
-    data: {access_token: token, q: username},
-    success: function(data){
-             console.log(data);
-              $.ajax({
-               url: 'https://api.instagram.com/v1/users/' + data.data[0].id + '/media/recent',
-              dataType: 'jsonp',
-              type: 'GET',
-               data: {access_token: token, count: num_photos},
-               success: function(data2){
-                 console.log(data2);
-                for(x in data2.data){
-                  $('ul').append('<li><img src="'+data2.data[x].images.thumbnail.url+'"></li>');  
-        }
-          },
-      error: function(data2){
-        console.log(data2);
-      }
-     });
-    },
-  error: function(data){
-      console.log(data);
-   }
-  });
 
 
 
@@ -281,13 +259,10 @@ function populateInfoWindow(marker, infowindow) {
   // ********************
 }
 
-
-
 // This function will show all names so that the user will search by the search bar
 function searchlist() {
   // Declare variables
   var input, filter, ul, li, a, i;
-  input = document.getElementById('search-box');
   filter = input.value.toUpperCase();
   ul = document.getElementById("dog-list");
   li = ul.getElementsByTagName('li');
