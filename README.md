@@ -29,7 +29,7 @@ This was a pretty extensive project, and I definitely have to thank the followin
  `$ npm install http-server -g`
 
  4. Change your directory to src:
- `$cd /{directory}/src
+ `$cd /{directory}/src`
 
  5. Run server
  `$ http-server`
