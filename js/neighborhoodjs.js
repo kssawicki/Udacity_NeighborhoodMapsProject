@@ -4,11 +4,11 @@ var friendLocations = [{
 
     title: "Ziggy",
 
-    image: "<a href=./imgs/ziggy.jpeg>",
+    image: "ziggy.jpeg",
 
     description: "This is my dog! She is 6 years old, a border collie-lab mix, and likes to eat anything that has peanut butter (like me!)",
 
-    url: "https://www.instagram.com/katherinessawicki/",
+    username: "https://www.instagram.com/katherinessawicki/",
 
     location: {
 
@@ -24,6 +24,8 @@ var friendLocations = [{
   {
 
     title: "Pogo",
+
+    image: "pogo.jpeg",
 
     description: "This half jack russell, half lab mix is really hyper! He loves eating all the veggies and fruits his owners grow, so he is very fit!",
 
@@ -43,6 +45,8 @@ var friendLocations = [{
 
     description: "Frank and Oreo are my boyfriend`s parents` dogs! They are both seniors, and are very friendly! Though they can annoy each other to the point of biting one another, they are best friends!",
 
+    image: "f_o.jpg",
+
     location: {
 
       lat: 39.419104,
@@ -58,6 +62,8 @@ var friendLocations = [{
     title: "Valentina",
 
     description: "Valentina is a half pomeranian, half chihuahua mix! She is basically a model because of how extravagant her fur is!",
+
+    image: "Valentina.png",
 
     location: {
 
@@ -75,6 +81,8 @@ var friendLocations = [{
 
     description: "Milo is a great guard dog that lives next door to my mom. His favorite hobby is to bark at EVERYTHING.",
 
+    image: "milo.JPG",
+
     location: {
 
       lat: 39.504568,
@@ -90,6 +98,8 @@ var friendLocations = [{
     title: "Kimbo",
 
     description: "Though Kimbo looks gigantic and threatening, he is actually kinda dumb and very sweet! He is a purebred rotweiller.",
+
+    image: "kimbo.png",
 
     location: {
 
@@ -161,7 +171,7 @@ function initMap() {
 
     var image = friendLocations[i].image;
 
-    var url = friendLocations[i].url;
+    var username = friendLocations[i].username;
 
     // Create a marker per location, and put into markers array.
 
@@ -177,7 +187,7 @@ function initMap() {
 
       title: title,
 
-      url: url,
+      username: username,
 
       animation: google.maps.Animation.DROP,
 
@@ -203,7 +213,6 @@ function initMap() {
 }
 
 
-
 // This function populates the infowindow when the marker is clicked. We'll only allow
 
 // one infowindow which will open at the marker that is clicked, and populate based
@@ -211,19 +220,52 @@ function initMap() {
 // on that markers position.
 
 function getContentString(marker) {
-  var contentString = '<div class="infoWindow"><h4><strong>' + marker.title + '</strong></h4><br>' + '<p>' + marker.description + '</p></div>';
+  var contentString = '<div class="infoWindow"><h4><strong>' + marker.title + '</strong></h4><br>' + '<p>' + marker.description + '</p>' + '<img src="imgs/' + marker.image + '" />' + '<href a="username' + marker.username + '"/></div>';
 
   return contentString;
 }
 
 function populateInfoWindow(marker, infowindow) {
 
+  console.log(marker.image);
+  console.log(marker.username);
+
   //ajax call variable formatting (commas on multiple var assignment not semicolons)
 
   var query = marker.title,
        dt = 'jsonp',
        urlBase = "https://api.instagram.com/v1/users/search",
-     fullApiURL = "https://api.instagram.com/v1/users/search" + "formatting" + query + "formatting from api docs"
+     fullApiURL = "https://api.instagram.com/v1/users/search" + "formatting" + query + "formatting from api docs";
+    var token = '271162913.1677ed0.7a8017e118e146b2a2ebe40414359c1d',
+    num_photos = 4;
+ 
+$.ajax({ 
+  url: 'https://api.instagram.com/v1/users/search',
+  dataType: 'jsonp',
+  type: 'GET',
+  data: {access_token: token, q: marker.username}, // search by username?
+  success: function(data){
+    console.log(data);
+    $.ajax({
+      url: 'https://api.instagram.com/v1/users/' + data.data[0].id + '/media/recent', 
+      dataType: 'jsonp',
+      type: 'GET',
+      data: {access_token: token, count: num_photos},
+      success: function(data2){
+        console.log(data2);
+        for(x in data2.data){
+          $('ul').append('<li><img src="'+data2.data[x].images.thumbnail.url+'"></li>');  
+        }
+          },
+      error: function(data2){
+        console.log(data2);
+      }
+    });
+  },
+  error: function(data){
+    console.log(data);
+  }
+});
 
   //if marker has no description do the call
   //otherwise set info window content and open info window
@@ -277,6 +319,15 @@ function searchlist() {
     }
   }
 }
+
+// Clicking on a list item
+$('#list li').each(function(i, e) {
+  $(e).click(function(i) {
+    return function(e) {
+      google.maps.event.trigger(friendLocations[i], 'click');
+    }
+  }(i));
+});
 
 
 function FriendLocation(title, location, count) {
