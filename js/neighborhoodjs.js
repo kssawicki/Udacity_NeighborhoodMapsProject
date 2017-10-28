@@ -300,7 +300,7 @@ $('#list li').each(function(i, e) {
   $(e).click(function(i) {
     return function(e) {
       google.maps.event.trigger(friendLocations[i], 'click');
-    }
+    };
   }(i));
 });
 
