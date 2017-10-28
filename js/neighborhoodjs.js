@@ -8,7 +8,7 @@ var friendLocations = [{
 
     description: "This is my dog! She is 6 years old, a border collie-lab mix, and likes to eat anything that has peanut butter (like me!)",
 
-    username: "https://www.instagram.com/katherinessawicki/",
+    username: "katherinessawicki",
 
     location: {
 
@@ -29,6 +29,8 @@ var friendLocations = [{
 
     description: "This half jack russell, half lab mix is really hyper! He loves eating all the veggies and fruits his owners grow, so he is very fit!",
 
+    username: "explore/tags/jackrussell",
+
     location: {
 
       lat: 39.533983,
@@ -46,6 +48,8 @@ var friendLocations = [{
     description: "Frank and Oreo are my boyfriend`s parents` dogs! They are both seniors, and are very friendly! Though they can annoy each other to the point of biting one another, they are best friends!",
 
     image: "f_o.jpg",
+
+    username: "explore/tags/dogs",
 
     location: {
 
@@ -65,6 +69,8 @@ var friendLocations = [{
 
     image: "Valentina.png",
 
+    username: "valentina__sauce",
+
     location: {
 
       lat: 39.512546,
@@ -83,6 +89,8 @@ var friendLocations = [{
 
     image: "milo.JPG",
 
+    username: "explore/tags/dogsofinstagram",
+
     location: {
 
       lat: 39.504568,
@@ -100,6 +108,8 @@ var friendLocations = [{
     description: "Though Kimbo looks gigantic and threatening, he is actually kinda dumb and very sweet! He is a purebred rotweiller.",
 
     image: "kimbo.png",
+
+    username: "taylor1403",
 
     location: {
 
@@ -220,8 +230,7 @@ function initMap() {
 // on that markers position.
 
 function getContentString(marker) {
-  var contentString = '<div class="infoWindow"><h4><strong>' + marker.title + '</strong></h4><br>' + '<p>' + marker.description + '</p>' + '<img src="imgs/' + marker.image + '" />' + '<href a="username' + marker.username + '"/></div>';
-
+  var contentString = '<div class="infoWindow"><h4><strong>' + marker.title + '</strong></h4><br>' + '<p>' + marker.description + '</p>' + '<img src="imgs/' + marker.image + '" />' + '<a href="https://www.instagram.com/' + marker.username + '">Instagram page</a></div>';
   return contentString;
 }
 
@@ -230,51 +239,17 @@ function populateInfoWindow(marker, infowindow) {
   console.log(marker.image);
   console.log(marker.username);
 
-  //ajax call variable formatting (commas on multiple var assignment not semicolons)
-
-  var query = marker.title,
-       dt = 'jsonp',
-       urlBase = "https://api.instagram.com/v1/users/search",
-     fullApiURL = "https://api.instagram.com/v1/users/search" + "formatting" + query + "formatting from api docs";
-    var token = '271162913.1677ed0.7a8017e118e146b2a2ebe40414359c1d',
-    num_photos = 4;
- 
-$.ajax({ 
-  url: 'https://api.instagram.com/v1/users/search',
-  dataType: 'jsonp',
-  type: 'GET',
-  data: {access_token: token, q: marker.username}, // search by username?
-  success: function(data){
-    console.log(data);
-    $.ajax({
-      url: 'https://api.instagram.com/v1/users/' + data.data[0].id + '/media/recent', 
-      dataType: 'jsonp',
-      type: 'GET',
-      data: {access_token: token, count: num_photos},
-      success: function(data2){
-        console.log(data2);
-        for(x in data2.data){
-          $('ul').append('<li><img src="'+data2.data[x].images.thumbnail.url+'"></li>');  
-        }
-          },
-      error: function(data2){
-        console.log(data2);
-      }
-    });
-  },
-  error: function(data){
-    console.log(data);
-  }
-});
-
-  //if marker has no description do the call
-  //otherwise set info window content and open info window
-
 
   // Instagram API
 
+var userFeed = new Instafeed({
+  get: 'user',
+  userId: '9c5e623ae6d24d7ca798902c0008a316',
+  accessToken: '7232baf8a1aa40dd9380ae3917743284'
+});
+userFeed.run();
 
-
+      
 
   // Check to make sure the infowindow is not already opened on this marker.
   // **************
