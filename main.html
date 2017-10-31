@@ -14,8 +14,8 @@
         <div class="row">
         <div class="col-6 col-md-4">
                 <input data-bind="textInput: searchBar, valueUpdate: 'afterkeydown'" placeholder="search friends" />
-        <ul data-bind="foreach: friendLocations">
-                <li>
+        <ul id="list" data-bind="foreach: friendLocations">
+                <li class="list_item">
                     <a href="#" data-bind="text: title, visible: visibility, click: $root.eventClickWindow" ></a>
                 </li>
         </ul>

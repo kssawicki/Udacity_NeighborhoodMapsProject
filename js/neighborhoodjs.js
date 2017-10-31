@@ -131,7 +131,7 @@ var friendLocations = [{
 
 var map, markers;
 
-markers = [];
+var markers = [];
 
 function initMap() {
 
@@ -242,12 +242,11 @@ function populateInfoWindow(marker, infowindow) {
 
   // Instagram API
 
-var userFeed = new Instafeed({
-  get: 'user',
-  userId: '9c5e623ae6d24d7ca798902c0008a316',
-  accessToken: '7232baf8a1aa40dd9380ae3917743284'
-});
-userFeed.run();
+// var userFeed = new Instafeed({
+ // get: 'user',
+ // userId: '9c5e623ae6d24d7ca798902c0008a316',
+ // accessToken: '7232baf8a1aa40dd9380ae3917743284'
+//userFeed.run();
 
       
 
@@ -300,7 +299,8 @@ $('#list li').each(function(i, e) {
   $(e).click(function(i) {
     return function(e) {
       google.maps.event.trigger(friendLocations[i], 'click');
-    };
+
+    }
   }(i));
 });
 
@@ -360,14 +360,14 @@ function FriendsViewModel() {
     }
   });
 
-  self.eventClickWindow = function() {
-    largeInfowindow = new googleError.maps.Infowindow();
-    for (var i = 0; i < markers.length; i++) {
-      if (this.title == markers[i].title) {
-        populateInfoWindow(markers[i], largeInfowindow);
-      }
-    }
-  };
+ // self.eventClickWindow = function() {
+  //  largeInfowindow = new googleError.maps.Infowindow();
+  ///  for (var i = 0; i < markers.length; i++) {
+   //   if (this.title == markers[i].title) {
+    //    populateInfoWindow(markers[i], largeInfowindow);
+   //   }
+ //   }
+ // };
 
 }
 
