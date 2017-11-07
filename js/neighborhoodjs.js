@@ -150,6 +150,39 @@ function initMap() {
   });
 
 
+// Wikipedia API (jQuery)
+$(document).ready(function(){
+ 
+    $.ajax({
+        type: "GET",
+        url: "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=",
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+ 
+            var markup = data.parse.text["*"];
+            var blurb = $('<div></div>').html(markup);
+ 
+            // remove links as they will not work
+            blurb.find('a').each(function() { $(this).replaceWith($(this).html()); });
+ 
+            // remove any references
+            blurb.find('sup').remove();
+ 
+            // remove cite error
+            blurb.find('.mw-ext-cite-error').remove();
+            $('#article').html($(blurb).find('p'));
+ 
+        },
+        error: function (errorMessage) {
+        }
+    });
+});
+
+
+
+
 
   // Markers and infowindows
 
@@ -183,6 +216,8 @@ function initMap() {
 
     var username = friendLocations[i].username;
 
+    var wikiURL = friendLocations[i].wikiURL;
+
     // Create a marker per location, and put into markers array.
 
     var marker = new google.maps.Marker({
@@ -204,6 +239,19 @@ function initMap() {
       id: i
 
     });
+    
+    marker.addListener('click',toggleBounce);
+  }
+
+  function toggleBounce() {
+        if (marker.getAnimation() !== null) {
+          marker.setAnimation(null);
+        } else {
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+      }
+
+    FVM.friendLocations()[i].marker = marker;
 
 
 
@@ -294,16 +342,6 @@ function searchlist() {
   }
 }
 
-// Clicking on a list item
-$('#list li').each(function(i, e) {
-  $(e).click(function(i) {
-    return function(e) {
-      google.maps.event.trigger(friendLocations[i], 'click');
-
-    }
-  }(i));
-});
-
 
 function FriendLocation(title, location, count) {
   var self = this;
@@ -360,6 +398,16 @@ function FriendsViewModel() {
     }
   });
 
+  // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
+  self.eventClickWindow = function(clickedListViewItem) { // or, call the first parameter friendLocation
+    //console.log('click')
+    console.log(clickedListViewItem) // clickedListViewItem.marker
+
+    // clickedListViewItem.marker to access the selected list view item's marker object
+    // you could, for example, use the google.maps.event.trigger() method trigger a 'click' event on clickedListViewItem.marker 
+
+  };
+
  // self.eventClickWindow = function() {
   //  largeInfowindow = new googleError.maps.Infowindow();
   ///  for (var i = 0; i < markers.length; i++) {
@@ -374,3 +422,13 @@ function FriendsViewModel() {
 
 var FVM = new FriendsViewModel();
 ko.applyBindings(FVM);
+
+
+$('li').each(function(i, e) {
+  $(e).click(function(i) {
+    return function(e) {
+       google.maps.event.trigger(friendLocations[i].marker, 'click');
+
+     }
+   }(i));
+ });
