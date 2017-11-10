@@ -49,7 +49,7 @@ var friendLocations = [{
 
     image: "f_o.jpg",
 
-    breed: "Chihuahua_(dog)",
+    username: "explore/tags/dogs",
 
     location: {
 
@@ -69,7 +69,7 @@ var friendLocations = [{
 
     image: "Valentina.png",
 
-    breed: "Pomeranian_dog",
+    username: "valentina__sauce",
 
     location: {
 
@@ -89,7 +89,7 @@ var friendLocations = [{
 
     image: "milo.JPG",
 
-    breed: "Chow_Chow",
+    username: "explore/tags/dogsofinstagram",
 
     location: {
 
@@ -109,7 +109,7 @@ var friendLocations = [{
 
     image: "kimbo.png",
 
-    breed: "Rottweiler",
+    username: "taylor1403",
 
     location: {
 
@@ -201,21 +201,25 @@ function initMap() {
 
       username: username,
 
-      breed: breed,
-
       id: i
-   });
-    marker.addListener('click', toggleBounce);
-  }
 
-  function toggleBounce(){
-    if (marker.getAnimation() !== null) {
-      marker.setAnimation(null);
-    } else {
-      marker.setAnimation(google.maps.Animation.BOUNCE);
-    }
-  
+    });
     
+// track marker that is currently bouncing
+var currentMarker = null;
+
+function bindInfoWindow(marker, map, largeInfoWindow, html) {
+    google.maps.event.addListener(marker, 'click', function() {
+        document.getElementById('friendLocationMarker').innerHTML = html;
+        // remove the bounce from the "old" marker
+        if (currentMarker) currentMarker.setAnimation(null);
+        // set this marker to the currentMarker
+        currentMarker = marker;
+        // add a bounce to this marker
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+
+    });
+}
 
 
 
@@ -234,23 +238,7 @@ function initMap() {
   map.fitBounds(bounds);
 }
 
-// This function populates the infowindow when the marker is clicked. We'll only allow
-
-// one infowindow which will open at the marker that is clicked, and populate based
-
-// on that markers position.
-
-function getContentString(marker) {
-  var contentString = '<div class="infoWindow"><h4><strong>' + marker.title + '</strong></h4><br>' + '<p>' + marker.description + '</p>' + '<img src="imgs/' + marker.image + '" />' + '<a href="http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=' + marker.breed + &callback=?'">Wikipedia Article</a></div>';
-  return contentString;
-}
-
-function populateInfoWindow(marker, infowindow) {
-
-  console.log(marker.image);
-  console.log(marker.username);
-
-  // Wikipedia API
+// Wikipedia API
 function getData(breed) {
 
     // Source: http://www.9bitstudios.com/2014/03/getting-data-from-the-wikipedia-api-using-jquery/
@@ -280,6 +268,22 @@ function getData(breed) {
         }
     });
 }
+
+// This function populates the infowindow when the marker is clicked. We'll only allow
+
+// one infowindow which will open at the marker that is clicked, and populate based
+
+// on that markers position.
+
+function getContentString(marker) {
+  var contentString = '<div class="infoWindow"><h4><strong>' + marker.title + '</strong></h4><br>' + '<p>' + marker.description + '</p>' + '<img src="imgs/' + marker.image + '" />' + '<a href="https://www.instagram.com/' + marker.username + '">Instagram page</a></div>'; 
+  return contentString;
+}
+
+function populateInfoWindow(marker, infowindow) {
+
+  console.log(marker.image);
+  console.log(marker.username);
 
       
 
