@@ -6,6 +6,8 @@ var friendLocations = [{
 
     image: "ziggy.jpeg",
 
+    username: "katherinessawicki",
+
     description: "This is my dog! She is 6 years old, a border collie-lab mix, and likes to eat anything that has peanut butter (like me!)",
 
     breed: "Border_Collie",
@@ -26,6 +28,8 @@ var friendLocations = [{
     title: "Pogo",
 
     image: "pogo.jpeg",
+
+    username: "jackrussellofinstagram",
 
     description: "This half jack russell, half lab mix is really hyper! He loves eating all the veggies and fruits his owners grow, so he is very fit!",
 
@@ -205,22 +209,6 @@ function initMap() {
 
     });
     
-// track marker that is currently bouncing
-var currentMarker = null;
-
-function bindInfoWindow(marker, map, largeInfoWindow, html) {
-    google.maps.event.addListener(marker, 'click', function() {
-        document.getElementById('friendLocationMarker').innerHTML = html;
-        // remove the bounce from the "old" marker
-        if (currentMarker) currentMarker.setAnimation(null);
-        // set this marker to the currentMarker
-        currentMarker = marker;
-        // add a bounce to this marker
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-
-    });
-}
-
 
 
 
@@ -277,6 +265,7 @@ function getData(breed) {
 
 function getContentString(marker) {
   var contentString = '<div class="infoWindow"><h4><strong>' + marker.title + '</strong></h4><br>' + '<p>' + marker.description + '</p>' + '<img src="imgs/' + marker.image + '" />' + '<a href="https://www.instagram.com/' + marker.username + '">Instagram page</a></div>'; 
+
   return contentString;
 }
 
