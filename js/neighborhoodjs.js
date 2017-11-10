@@ -8,7 +8,7 @@ var friendLocations = [{
 
     description: "This is my dog! She is 6 years old, a border collie-lab mix, and likes to eat anything that has peanut butter (like me!)",
 
-    username: "katherinessawicki",
+    breed: "Border_Collie",
 
     location: {
 
@@ -29,7 +29,7 @@ var friendLocations = [{
 
     description: "This half jack russell, half lab mix is really hyper! He loves eating all the veggies and fruits his owners grow, so he is very fit!",
 
-    username: "explore/tags/jackrussell",
+    breed: "Jack_Russell_Terrier",
 
     location: {
 
@@ -49,7 +49,7 @@ var friendLocations = [{
 
     image: "f_o.jpg",
 
-    username: "explore/tags/dogs",
+    breed: "Chihuahua_(dog)",
 
     location: {
 
@@ -69,7 +69,7 @@ var friendLocations = [{
 
     image: "Valentina.png",
 
-    username: "valentina__sauce",
+    breed: "Pomeranian_dog",
 
     location: {
 
@@ -89,7 +89,7 @@ var friendLocations = [{
 
     image: "milo.JPG",
 
-    username: "explore/tags/dogsofinstagram",
+    breed: "Chow_Chow",
 
     location: {
 
@@ -105,11 +105,11 @@ var friendLocations = [{
 
     title: "Kimbo",
 
-    description: "Though Kimbo looks gigantic and threatening, he is actually kinda dumb and very sweet! He is a purebred rotweiller.",
+    description: "Though Kimbo looks gigantic and threatening, he is actually kinda dumb and very sweet! He is a purebred rottweiler.",
 
     image: "kimbo.png",
 
-    username: "taylor1403",
+    breed: "Rottweiler",
 
     location: {
 
@@ -150,40 +150,6 @@ function initMap() {
   });
 
 
-// Wikipedia API (jQuery)
-$(document).ready(function(){
- 
-    $.ajax({
-        type: "GET",
-        url: "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=",
-        contentType: "application/json; charset=utf-8",
-        async: false,
-        dataType: "json",
-        success: function (data, textStatus, jqXHR) {
- 
-            var markup = data.parse.text["*"];
-            var blurb = $('<div></div>').html(markup);
- 
-            // remove links as they will not work
-            blurb.find('a').each(function() { $(this).replaceWith($(this).html()); });
- 
-            // remove any references
-            blurb.find('sup').remove();
- 
-            // remove cite error
-            blurb.find('.mw-ext-cite-error').remove();
-            $('#article').html($(blurb).find('p'));
- 
-        },
-        error: function (errorMessage) {
-        }
-    });
-});
-
-
-
-
-
   // Markers and infowindows
 
   var largeInfoWindow = new google.maps.InfoWindow();
@@ -194,6 +160,7 @@ $(document).ready(function(){
 
   var markerListener = function(marker) {
     marker.addListener('click', function() {
+      getData("marker.breed")
       populateInfoWindow(this, largeInfoWindow);
     });
   };
@@ -216,7 +183,7 @@ $(document).ready(function(){
 
     var username = friendLocations[i].username;
 
-    var wikiURL = friendLocations[i].wikiURL;
+    var breed = friendLocations[i].breed;
 
     // Create a marker per location, and put into markers array.
 
@@ -234,24 +201,22 @@ $(document).ready(function(){
 
       username: username,
 
-      animation: google.maps.Animation.DROP,
+      breed: breed,
 
       id: i
-
-    });
-    
-    marker.addListener('click',toggleBounce);
+   });
+    marker.addListener('click', toggleBounce);
   }
 
-  function toggleBounce() {
-        if (marker.getAnimation() !== null) {
-          marker.setAnimation(null);
-        } else {
-          marker.setAnimation(google.maps.Animation.BOUNCE);
-        }
-      }
+  function toggleBounce(){
+    if (marker.getAnimation() !== null) {
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+  
+    
 
-    FVM.friendLocations()[i].marker = marker;
 
 
 
@@ -267,9 +232,7 @@ $(document).ready(function(){
     bounds.extend(markers[i].position);
   }
   map.fitBounds(bounds);
-
 }
-
 
 // This function populates the infowindow when the marker is clicked. We'll only allow
 
@@ -278,7 +241,7 @@ $(document).ready(function(){
 // on that markers position.
 
 function getContentString(marker) {
-  var contentString = '<div class="infoWindow"><h4><strong>' + marker.title + '</strong></h4><br>' + '<p>' + marker.description + '</p>' + '<img src="imgs/' + marker.image + '" />' + '<a href="https://www.instagram.com/' + marker.username + '">Instagram page</a></div>';
+  var contentString = '<div class="infoWindow"><h4><strong>' + marker.title + '</strong></h4><br>' + '<p>' + marker.description + '</p>' + '<img src="imgs/' + marker.image + '" />' + '<a href="http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=' + marker.breed + &callback=?'">Wikipedia Article</a></div>';
   return contentString;
 }
 
@@ -287,14 +250,36 @@ function populateInfoWindow(marker, infowindow) {
   console.log(marker.image);
   console.log(marker.username);
 
+  // Wikipedia API
+function getData(breed) {
 
-  // Instagram API
+    // Source: http://www.9bitstudios.com/2014/03/getting-data-from-the-wikipedia-api-using-jquery/
+    $.ajax({
+        type: "GET",
+        url: "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=" + breed + "&callback=?",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
 
-// var userFeed = new Instafeed({
- // get: 'user',
- // userId: '9c5e623ae6d24d7ca798902c0008a316',
- // accessToken: '7232baf8a1aa40dd9380ae3917743284'
-//userFeed.run();
+            console.log(data)
+            // var markup = data.parse.text["*"];
+            // var blurb = $('<div></div>').html(markup);
+ 
+            // // remove links as they will not work
+            // blurb.find('a').each(function() { $(this).replaceWith($(this).html()); });
+ 
+            // // remove any references
+            // blurb.find('sup').remove();
+ 
+            // // remove cite error
+            // blurb.find('.mw-ext-cite-error').remove();
+            // $('#article').html($(blurb).find('p'));
+ 
+        },
+        error: function (errorMessage) {
+        }
+    });
+}
 
       
 
