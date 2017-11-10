@@ -53,6 +53,8 @@ var friendLocations = [{
 
     image: "f_o.jpg",
 
+    breed: "Chihuahua_(dog)",
+
     username: "explore/tags/dogs",
 
     location: {
@@ -75,6 +77,8 @@ var friendLocations = [{
 
     username: "valentina__sauce",
 
+    breed: "Pomeranian_dog",
+
     location: {
 
       lat: 39.512546,
@@ -92,6 +96,8 @@ var friendLocations = [{
     description: "Milo is a great guard dog that lives next door to my mom. His favorite hobby is to bark at EVERYTHING.",
 
     image: "milo.JPG",
+
+    breed: "Chow_Chow",
 
     username: "explore/tags/dogsofinstagram",
 
@@ -112,6 +118,8 @@ var friendLocations = [{
     description: "Though Kimbo looks gigantic and threatening, he is actually kinda dumb and very sweet! He is a purebred rottweiler.",
 
     image: "kimbo.png",
+
+    breed: "Rottweiler",
 
     username: "taylor1403",
 
@@ -208,7 +216,15 @@ function initMap() {
       id: i
 
     });
-    
+    marker.addListener('click', toggleBounce);
+    function toggleBounce() {
+        if (marker.getAnimation() !== null) {
+          marker.setAnimation(null);
+        } else {
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+        }
+
 
 
 
