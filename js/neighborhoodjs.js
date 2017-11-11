@@ -133,8 +133,6 @@ var friendLocations = [{
 
   },
 
-
-
 ];
 
 
@@ -212,6 +210,8 @@ function initMap() {
       title: title,
 
       username: username,
+
+      breed: breed,
 
       id: i
 
