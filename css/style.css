@@ -1,3 +1,7 @@
+@media (min-width: 320em) {
+
+}
+
 #map {
 	height: 100%;
 	max-width: 100%;
@@ -15,16 +19,15 @@
 	line-height: 35px;
 	padding: 10px 10px 30px 10px;
 	text-align: left;
-	width: 340px;
 	font-family: sans-serif;
 }
 
 .list {
-	width: 100px;
+	max-width: 100px;
 }
 
 .search-box {
-	width: 300px;
+	max-width: 100%;
 	font-size: 16px;
 	border: 2px solid #000;
 	font-family: Sans-serif;

@@ -216,16 +216,23 @@ function initMap() {
       id: i
 
     });
-    marker.addListener('click', toggleBounce);
-    function toggleBounce() {
-        if (marker.getAnimation() !== null) {
-          marker.setAnimation(null);
-        } else {
-          marker.setAnimation(google.maps.Animation.BOUNCE);
+    // Credit for bounce animation: https://stackoverflow.com/questions/45507427/stop-marker-animation-in-google-maps-with-multiple-markers
+    marker.addListener('click', function() {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setAnimation(null);
         }
-        }
+        toggleBounce(this);
+        map.setZoom(10);
+        map.setCenter(marker.getPosition());
+      });
 
-
+  function toggleBounce(ele) {
+  if (ele.getAnimation() !== null) {
+    ele.setAnimation(null);
+  } else {
+    ele.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
 
 
     // Push the marker to our array of markers.
@@ -254,19 +261,6 @@ function getData(breed) {
         success: function (data, textStatus, jqXHR) {
 
             console.log(data)
-            // var markup = data.parse.text["*"];
-            // var blurb = $('<div></div>').html(markup);
- 
-            // // remove links as they will not work
-            // blurb.find('a').each(function() { $(this).replaceWith($(this).html()); });
- 
-            // // remove any references
-            // blurb.find('sup').remove();
- 
-            // // remove cite error
-            // blurb.find('.mw-ext-cite-error').remove();
-            // $('#article').html($(blurb).find('p'));
- 
         },
         error: function (errorMessage) {
         }
@@ -402,14 +396,14 @@ function FriendsViewModel() {
 
   };
 
- // self.eventClickWindow = function() {
-  //  largeInfowindow = new googleError.maps.Infowindow();
-  ///  for (var i = 0; i < markers.length; i++) {
-   //   if (this.title == markers[i].title) {
-    //    populateInfoWindow(markers[i], largeInfowindow);
-   //   }
- //   }
- // };
+  self.eventClickWindow = function() {
+   largeInfowindow = new google.maps.Infowindow();
+    for (var i = 0; i < markers.length; i++) {
+      if (this.title == markers[i].title) {
+       populateInfoWindow(markers[i], largeInfowindow);
+      }
+    }
+  };
 
 }
 
@@ -417,12 +411,3 @@ function FriendsViewModel() {
 var FVM = new FriendsViewModel();
 ko.applyBindings(FVM);
 
-
-$('li').each(function(i, e) {
-  $(e).click(function(i) {
-    return function(e) {
-       google.maps.event.trigger(friendLocations[i].marker, 'click');
-
-     }
-   }(i));
- });
