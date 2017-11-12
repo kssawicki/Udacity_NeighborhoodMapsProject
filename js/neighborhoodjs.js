@@ -1,3 +1,5 @@
+"use strict";
+
 // 'use strict';
 // Information about the places these dogs live
 var friendLocations = [{
@@ -141,7 +143,7 @@ var friendLocations = [{
 
 // Initializing map
 
-var map, markers;
+var map;
 
 var markers = [];
 
@@ -172,7 +174,8 @@ function initMap() {
 
   var markerListener = function(marker) {
     marker.addListener('click', function() {
-      getData("marker.breed")
+      // no marker breed exists, and this was a string.
+      getData(marker.breed)
       populateInfoWindow(this, largeInfoWindow);
     });
   };
@@ -213,7 +216,8 @@ function initMap() {
 
       username: username,
 
-      id: i
+      id: i,
+      breed: breed
 
     });
     marker.addListener('click', toggleBounce);
@@ -244,33 +248,19 @@ function initMap() {
 
 // Wikipedia API
 function getData(breed) {
-
-    // Source: http://www.9bitstudios.com/2014/03/getting-data-from-the-wikipedia-api-using-jquery/
-    $.ajax({
-        type: "GET",
-        url: "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=" + breed + "&callback=?",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data, textStatus, jqXHR) {
-
-            console.log(data)
-            // var markup = data.parse.text["*"];
-            // var blurb = $('<div></div>').html(markup);
- 
-            // // remove links as they will not work
-            // blurb.find('a').each(function() { $(this).replaceWith($(this).html()); });
- 
-            // // remove any references
-            // blurb.find('sup').remove();
- 
-            // // remove cite error
-            // blurb.find('.mw-ext-cite-error').remove();
-            // $('#article').html($(blurb).find('p'));
- 
-        },
-        error: function (errorMessage) {
-        }
+    // Source: https://www.mediawiki.org/wiki/API:Main_page
+  $.ajax({
+    type: "GET",
+    url: "http://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=" + breed + "&callback=?",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json"
+  }).then(function (data, textStatus, jqXHR) {
+    Object.values(data.query.pages).forEach(function (item) {
+      console.log(item.extract);
     });
+  }).catch(function (errorMessage) {
+    console.error(errorMessage);
+  });
 }
 
 // This function populates the infowindow when the marker is clicked. We'll only allow
@@ -280,7 +270,7 @@ function getData(breed) {
 // on that markers position.
 
 function getContentString(marker) {
-  var contentString = '<div class="infoWindow"><h4><strong>' + marker.title + '</strong></h4><br>' + '<p>' + marker.description + '</p>' + '<img src="imgs/' + marker.image + '" />' + '<a href="https://www.instagram.com/' + marker.username + '">Instagram page</a></div>'; 
+  var contentString = '<div class="infoWindow"><h4><strong>' + marker.title + '</strong></h4><br>' + '<p>' + marker.description + '</p>' + '<img src="imgs/' + marker.image + '" />' + '<a href="https://www.instagram.com/' + marker.username + '">Instagram page</a></div>';
 
   return contentString;
 }
@@ -290,7 +280,7 @@ function populateInfoWindow(marker, infowindow) {
   console.log(marker.image);
   console.log(marker.username);
 
-      
+
 
   // Check to make sure the infowindow is not already opened on this marker.
   // **************
