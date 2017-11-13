@@ -26,8 +26,8 @@
             </div>
             <ul id="list" class="list-group" data-bind="foreach: friendLocations">
 
-                <li class="list-group-item">
-                    <a href="#" data-bind="text: title, visible: visibility, click: $root.eventClickWindow"></a>
+                <li class="list-group-item" data-bind="text: title, visible: visibility, click: $root.eventClickWindow">
+                    <a href="#" ></a>
                 </li>
             </ul>
         </div>
@@ -35,13 +35,23 @@
             <div id="map"></div>
         </div>
     </div>
+    <div id="hideWiki" class="d-none col-12 mt-3">
+        <div class="card alert alert-info">
+          <div class="card-body">
+            <h2 class="card-title" id="doggyTitle"></h2>
+              <section id="funs"></section>
+
+          </div>
+        </div>
+
+    </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"></script>
 <script src="./js/neighborhoodjs.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALFqt8e2sZQoXr0Tu3SQI2ZXLBgdYRDWY&callback=initMap"></script>
 
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALFqt8e2sZQoXr0Tu3SQI2ZXLBgdYRDWY&callback=initMap"></script>
+
 </body>
 </html>
