@@ -174,7 +174,9 @@
 
     var friendLocationMarker = function(f, marker) {
       friendLocations[f].marker = marker;
+
     };
+
 
     var markerListener = function(marker) {
       marker.addListener('click', function() {
@@ -203,6 +205,8 @@
       var username = friendLocations[i].username;
 
       var breed = friendLocations[i].breed;
+
+
 
       // Create a marker per location, and put into markers array.
 
@@ -255,6 +259,7 @@
 
       //bind markers to friends
       friendLocationMarker(i, marker);
+
 
       //use extracted function for onclick
       markerListener(marker);
@@ -361,8 +366,11 @@
     var self = this;
     self.count = count;
     self.title = title;
-    self.locaiton = location;
+    self.location = location;
     self.visibility = ko.observable(true);
+    self.eventClickWindow = function (el) {
+      google.maps.event.trigger(markers[count], 'click');
+    };
   }
 
   function FriendsViewModel() {
@@ -383,10 +391,9 @@
 
     //init the friends
     self.friendLocations = ko.observableArray();
-
     var i = 0;
     friendLocations.forEach((friend) => {
-      self.friendLocations.push(new FriendLocation(friend.title, friend.locaiton, i));
+      self.friendLocations.push(new FriendLocation(friend.title, friend.location, i));
       i += 1;
     });
 
@@ -412,38 +419,11 @@
       }
     });
 
-    // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
-    self.eventClickWindow = function(clickedListViewItem) { // or, call the first parameter friendLocation
-      //console.log('click')
-
-      // clickedListViewItem.marker to access the selected list view item's marker object
-      // you could, for example, use the google.maps.event.trigger() method trigger a 'click' event on clickedListViewItem.marker
-
-    };
-
-    // self.eventClickWindow = function() {
-    //  largeInfowindow = new googleError.maps.Infowindow();
-    ///  for (var i = 0; i < markers.length; i++) {
-    //   if (this.title == markers[i].title) {
-    //    populateInfoWindow(markers[i], largeInfowindow);
-    //   }
-    //   }
-    // };
-
   }
 
 
   var FVM = new FriendsViewModel();
   ko.applyBindings(FVM);
 
-
-  $('li').each(function(i, e) {
-    $(e).click(function(i) {
-      return function(e) {
-        google.maps.event.trigger(friendLocations[i].marker, 'click');
-
-      };
-    }(i));
-  });
   global.initMap = initMap;
 })(window);
