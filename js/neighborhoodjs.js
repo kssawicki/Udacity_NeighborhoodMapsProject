@@ -235,7 +235,13 @@
         map.setCenter(marker.getPosition());
       });
 
-
+  function toggleBounce(ele) {
+  if (ele.getAnimation() !== null) {
+    ele.setAnimation(null);
+  } else {
+    ele.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
 
 
       function toggleBounce(ele) {
@@ -286,6 +292,16 @@
           document.querySelector('#hideWiki').classList.remove('d-none');
         } else {
           throw new Error("There is no FUN!!!!!");
+
+        type: "GET",
+        url: "http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=" + breed + "&callback=?",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+
+            console.log(data)
+        },
+        error: function (errorMessage) {
         }
 
       });
@@ -393,7 +409,8 @@
     //  http://www.knockmeout.net/2011/04/utility-function-in-knockoutjs.html
     self.filteredList = ko.computed(function() {
       var filter = self.searchResults().toUpperCase();
-      if (filter === "") {
+      if (filter 
+         "") {
         self.friendLocations().forEach((friend) => {
           friend.visibility(true);
           markers.forEach((marker) => {
@@ -421,14 +438,16 @@
 
     };
 
-    // self.eventClickWindow = function() {
-    //  largeInfowindow = new googleError.maps.Infowindow();
-    ///  for (var i = 0; i < markers.length; i++) {
-    //   if (this.title == markers[i].title) {
-    //    populateInfoWindow(markers[i], largeInfowindow);
-    //   }
-    //   }
-    // };
+
+  self.eventClickWindow = function() {
+   largeInfowindow = new google.maps.Infowindow();
+    for (var i = 0; i < markers.length; i++) {
+      if (this.title == markers[i].title) {
+       populateInfoWindow(markers[i], largeInfowindow);
+      }
+    }
+  };
+
 
   }
 
