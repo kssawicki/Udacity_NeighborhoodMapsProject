@@ -98,11 +98,10 @@
                 breed: breed
 
             });
-            getData(breed);
+
             /* jshint ignore:start */
             marker.addListener('click', function() {
                 // no marker breed exists, and this was a string.
-                getData(marker.breed);
                 populateInfoWindow(this, largeInfoWindow);
             });
             // Credit for bounce animation: https://stackoverflow.com/questions/45507427/stop-marker-animation-in-google-maps-with-multiple-markers
@@ -246,7 +245,9 @@
         self.location = location;
         self.visibility = ko.observable(true);
         self.eventClickWindow = function(el) {
-            google.maps.event.trigger(markers[count], 'click');
+            var marker = markers[count];
+            getData(marker.breed);
+            google.maps.event.trigger(marker, 'click');
         };
     }
 
