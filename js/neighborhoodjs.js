@@ -26,7 +26,7 @@
             initMap();
         }).catch(function(err) {
             throw Error(err);
-        })
+        });
     }
     // Initializing map
     var map;
@@ -99,13 +99,14 @@
 
             });
             getData(breed);
+            /* jshint ignore:start */
             marker.addListener('click', function() {
                 // no marker breed exists, and this was a string.
                 getData(marker.breed);
                 populateInfoWindow(this, largeInfoWindow);
             });
             // Credit for bounce animation: https://stackoverflow.com/questions/45507427/stop-marker-animation-in-google-maps-with-multiple-markers
-            /* jshint ignore:start */
+
             marker.addListener('click', function() {
                 for (var i = 0; i < markers.length; i++) {
                     markers[i].setAnimation(null);
