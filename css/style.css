@@ -3,13 +3,10 @@
 }
 
 #map {
-	height: 100%;
 	max-width: 100%;
-	bottom: 0px;
 	height: 100%;
-	left: 362px;
-	position: absolute;
-	right: 0px;
+	position: inherit;
+	min-height:500px;
 }
 
 .options-box {
@@ -30,10 +27,14 @@
 	max-width: 100%;
 	font-size: 16px;
 	border: 2px solid #000;
-	font-family: Sans-serif;
+	font-family: sans-serif;
 }
 
 #img {
 	max-width: 100%;
 
+}
+
+.list-group-item:hover {
+	cursor:pointer;
 }
