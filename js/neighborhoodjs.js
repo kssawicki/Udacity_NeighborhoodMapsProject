@@ -95,6 +95,7 @@
                 username: username,
 
                 id: i,
+
                 breed: breed
 
             });
