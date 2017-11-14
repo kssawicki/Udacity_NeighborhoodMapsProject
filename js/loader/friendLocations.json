@@ -1,0 +1,69 @@
+{
+    "friendLocations": [{
+            "title": "Ziggy",
+            "image": "ziggy.jpeg",
+            "username": "katherinessawicki",
+            "description": "This is my dog! She is 6 years old, a border collie-lab mix, and likes to eat anything that has peanut butter (like me!)",
+            "breed": "Border_Collie",
+            "location": {
+                "lat": 39.5050151,
+                "lng": -119.812267
+            }
+        },
+        {
+            "title": "Pogo",
+            "image": "pogo.jpeg",
+            "username": "jackrussellofinstagram",
+            "description": "This half jack russell, half lab mix is really hyper! He loves eating all the veggies and fruits his owners grow, so he is very fit!",
+            "breed": "Jack_Russell_Terrier",
+            "location": {
+                "lat": 39.533983,
+                "lng": -119.878318
+            }
+        },
+        {
+            "title": "Frank & Oreo",
+            "description": "Frank and Oreo are my boyfriend`s parents` dogs! They are both seniors, and are very friendly! Though they can annoy each other to the point of biting one another, they are best friends!",
+            "image": "f_o.jpg",
+            "breed": "Chihuahua_(dog)",
+            "username": "explore/tags/dogs",
+            "location": {
+                "lat": 39.419104,
+                "lng": -119.772268
+            }
+        },
+        {
+            "title": "Valentina",
+            "description": "Valentina is a half pomeranian, half chihuahua mix! She is basically a model because of how extravagant her fur is!",
+            "image": "Valentina.png",
+            "username": "valentina__sauce",
+            "breed": "Pomeranian_dog",
+            "location": {
+                "lat": 39.512546,
+                "lng": -119.813448
+            }
+        },
+        {
+            "title": "Milo",
+            "description": "Milo is a great guard dog that lives next door to my mom. His favorite hobby is to bark at EVERYTHING.",
+            "image": "milo.JPG",
+            "breed": "Chow_Chow",
+            "username": "explore/tags/dogsofinstagram",
+            "location": {
+                "lat": 39.504568,
+                "lng": -119.809846
+            }
+        },
+        {
+            "title": "Kimbo",
+            "description": "Though Kimbo looks gigantic and threatening, he is actually kinda dumb and very sweet! He is a purebred rottweiler.",
+            "image": "kimbo.png",
+            "breed": "Rottweiler",
+            "username": "taylor1403",
+            "location": {
+                "lat": 39.576616,
+                "lng": -119.824863
+            }
+        }
+    ]
+}

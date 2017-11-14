@@ -30,13 +30,10 @@ This was a pretty extensive project, and I definitely have to thank the followin
  2. Move to the directory you cloned the repository to.
 
  3. Install http-server:
- `$ npm install http-server -g`
+ `$ npm install --production`
 
- 4. Change your directory to src:
- `$cd /{directory}/src`
+ 4. Run server
+ `$ npm run http-server`
 
- 5. Run server
- `$ http-server`
-
- 6. Visit URL:
+ 5. Visit URL:
  `$ http://localhost:8080`

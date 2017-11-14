@@ -1,27 +1,33 @@
 {
-  "name": "udacity_neighborhoodmapsproject",
-  "version": "1.0.0",
-  "description": "## Introduction This project implements Google Maps API in order to create an interactive map. In my example, I have mapped out where dogs I know live!",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "http-server": "http-server",
-    "jshint": "jshint ./js/*.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NoMan2000/Udacity_NeighborhoodMapsProject.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/NoMan2000/Udacity_NeighborhoodMapsProject/issues"
-  },
-  "homepage": "https://github.com/NoMan2000/Udacity_NeighborhoodMapsProject#readme",
-  "dependencies": {
-    "http-server": "^0.10.0"
-  },
-  "devDependencies": {
-    "jshint": "^2.9.5"
-  }
+    "name": "udacity_neighborhoodmapsproject",
+    "version": "1.0.0",
+    "description": "## Introduction This project implements Google Maps API in order to create an interactive map. In my example, I have mapped out where dogs I know live!",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "http-server": "http-server",
+        "jshint": "jshint",
+        "jshint:dev": "jshint ./js/*.js",
+        "jshint:windows": "for /r js/ %f in (*.js) do jshint %f"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/NoMan2000/Udacity_NeighborhoodMapsProject.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/NoMan2000/Udacity_NeighborhoodMapsProject/issues"
+    },
+    "homepage": "https://github.com/NoMan2000/Udacity_NeighborhoodMapsProject#readme",
+    "dependencies": {
+        "bootstrap": "^3.3.7",
+        "core-js": "^2.5.1",
+        "jquery": "^3.2.1",
+        "whatwg-fetch": "^2.0.3",
+        "http-server": "^0.10.0"
+    },
+    "devDependencies": {
+        "jshint": "^2.9.5"
+    }
 }
