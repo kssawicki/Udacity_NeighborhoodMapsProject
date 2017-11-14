@@ -1,57 +1,59 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width" , initial-scale="1.0">
-    <link rel="shortcut icon" href="/imgs/doggy.ico" type="image/x-icon">
-    <link rel="icon" href="/imgs/doggy.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
     <link rel="stylesheet" href="./css/style.css">
     <title>Dogs I Know</title>
 </head>
-
 <body>
-    <div class="container-fluid mt-2">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <div class="input-group">
-                    <span class="input-group-btn">
+<div class="container-fluid mt-2">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="input-group">
+                  <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button">Search!</button>
                   </span>
-                    <input type="search" class="form-control" data-bind="textInput: searchBar, valueUpdate: 'afterkeydown'" id="searchBar" name="searchBar" placeholder="Search for dogs" aria-label="Search for dogs">
+                <input type="search" class="form-control"
+                       data-bind="textInput: searchBar, valueUpdate: 'afterkeydown'"
+                       id="searchBar"
+                       name="searchBar"
+                       placeholder="Search for dogs" aria-label="Search for dogs">
 
-                </div>
-                <ul id="list" class="list-group" data-bind="foreach: friendLocations">
+            </div>
+            <ul id="list" class="list-group" data-bind="foreach: friendLocations">
 
-                    <li class="list-group-item" data-bind="text: title, visible: visibility, click: eventClickWindow">
-                        <a href="#"></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-12 col-md-6">
-                <div id="map"></div>
-            </div>
+                <li class="list-group-item" data-bind="text: title, visible: visibility, click: eventClickWindow">
+                    <a href="#" ></a>
+                </li>
+            </ul>
         </div>
-        <div id="hideWiki" class="d-none col-12 mt-3">
-            <div class="card alert alert-info">
-                <div class="card-body">
-                    <h2 class="card-title" id="doggyTitle"></h2>
-                    <section id="funs"></section>
-
-                </div>
-            </div>
-
+        <div class="col-12 col-md-6">
+            <div id="map"></div>
         </div>
     </div>
+    <div id="hideWiki" class="col-12 mt-3" data-bind="css: {  'd-none': hideDog}">
+        <div class="card alert alert-info">
+          <div class="card-body">
+            <h2 class="card-title" id="doggyTitle" data-bind="text: breed" ></h2>
+              <section id="funs" data-bind="foreach: details">
+                <div data-bind="html: $data"></div>
+              </section>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALFqt8e2sZQoXr0Tu3SQI2ZXLBgdYRDWY" async></script>
-    <script src="./js/neighborhoodjs.js"></script>
+          </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"></script>
+<script src="./js/neighborhoodjs.js"></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALFqt8e2sZQoXr0Tu3SQI2ZXLBgdYRDWY&callback=initMap" onerror="MapError()"></script>
 
 
 </body>
-
 </html>
