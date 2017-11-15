@@ -167,6 +167,9 @@
 
     });
 
+function mapError() {
+  alert('No doggies for you! Try again!');
+}
 
     // Markers and infowindows
 
@@ -225,6 +228,7 @@
         username: username,
 
         id: i,
+
         breed: breed
 
       });
@@ -273,6 +277,11 @@
     alert('No doggies for you!');
   }
 
+  //Wikipedia API error Handling
+  var wikiRequestTimeout = setTimeout(function(){
+    $wikiElem.text("Failed to get doggy info!");
+  }, 8000);
+
   // Wikipedia API
   function getData(breed) {
     // Source: https://www.mediawiki.org/wiki/API:Main_page
@@ -301,9 +310,8 @@
        // } else {
         //  throw new Error("There is no FUN!!!!!");
        // }
-       msg = 'No doggies for you!';
-       error(msg);
       });
+      clearTimeout(wikiRequestTimeout);
 
     }).catch(function(errorMessage) {
       console.error(errorMessage);
