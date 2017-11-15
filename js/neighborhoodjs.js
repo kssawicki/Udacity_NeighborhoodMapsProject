@@ -299,6 +299,10 @@
     }).catch(function(errorMessage) {
       console.error(errorMessage);
     });
+    //If error in loading Wikipedia articles. Credit: http://www.binaryintellect.net/articles/749ed588-b408-4a7e-94da-77549c00e803.aspx
+    $(document).ajaxError (function (evt, jqXHR, setings, err) {
+      alert("No doges Wikipedia infor for you? Try again!");
+    });
   }
 
   // This function populates the infowindow when the marker is clicked. We'll only allow
@@ -413,11 +417,6 @@
 })(window);
 
 //Google API error handler
-function mapError() {
+function MapError() {
   alert('No doggies for you! Try again!');
-}
-
-//Wikipedia API error handler
-function WikiError() {
-  alert('No doges for you? Try again!');
 }
