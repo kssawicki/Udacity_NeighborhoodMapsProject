@@ -83,7 +83,7 @@
 
       username: "valentina__sauce",
 
-      breed: "Pomeranian_dog",
+      breed: "Pomeranian_(dog_breed)",
 
       location: {
 
