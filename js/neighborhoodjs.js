@@ -167,10 +167,6 @@
 
     });
 
-function mapError() {
-  alert('No doggies for you! Try again!');
-}
-
     // Markers and infowindows
 
     var largeInfoWindow = new google.maps.InfoWindow();
@@ -272,15 +268,6 @@ function mapError() {
     map.fitBounds(bounds);
   }
 
-  //Maps Error Handling
-  function MapError() {
-    alert('No doggies for you!');
-  }
-
-  //Wikipedia API error Handling
-  var wikiRequestTimeout = setTimeout(function(){
-    $wikiElem.text("Failed to get doggy info!");
-  }, 8000);
 
   // Wikipedia API
   function getData(breed) {
@@ -305,13 +292,9 @@ function mapError() {
           funsEl.innerHTML = _tempDoc.innerHTML; */
           FVM.breed(breed);
           FVM.hideDog(false);
-//document.querySelector('#doggyTitle').innerHTML = breed;
-       //   document.querySelector('#hideWiki').classList.remove('d-none');
-       // } else {
-        //  throw new Error("There is no FUN!!!!!");
-       // }
+
+
       });
-      clearTimeout(wikiRequestTimeout);
 
     }).catch(function(errorMessage) {
       console.error(errorMessage);
@@ -360,26 +343,6 @@ function mapError() {
     }
     // ********************
   }
-
-  // This function will show all names so that the user will search by the search bar
-  function searchlist() {
-    // Declare variables
-    var input, filter, ul, li, a, i;
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("dog-list");
-    li = ul.getElementsByTagName('li');
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-      a = li[i].getElementsByTagName("a")[0];
-      if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        li[i].style.display = "";
-      } else {
-        li[i].style.display = "none";
-      }
-    }
-  }
-
 
   function FriendLocation(title, location, count) {
     var self = this;
@@ -448,3 +411,13 @@ function mapError() {
 
   global.initMap = initMap;
 })(window);
+
+//Google API error handler
+function mapError() {
+  alert('No doggies for you! Try again!');
+}
+
+//Wikipedia API error handler
+function WikiError() {
+  alert('No doges for you? Try again!');
+}
